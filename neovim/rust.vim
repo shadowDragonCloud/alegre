@@ -36,8 +36,9 @@ let g:LanguageClient_serverCommands = {
 
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 " Or map each action separately
-nnoremap <silent> ho :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> lr :call LanguageClient#textDocument_references()<CR>
+" The following two maps will slow [h]&[l] cursor move on mac, comment them
+" nnoremap <silent> ho :call LanguageClient#textDocument_hover()<CR>
+" nnoremap <silent> lr :call LanguageClient#textDocument_references()<CR>
 :command Rename :call LanguageClient#textDocument_rename()
 :command Format :call LanguageClient#textDocument_formatting()
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
@@ -76,7 +77,7 @@ let g:tagbar_width=100
 let g:tagbar_use_cache = 0 " required with snap ctags
 nmap <silent> tb :TagbarToggle<CR>
 let g:tagbar_type_rust = {
-  \ 'ctagsbin' : '/snap/bin/ctags',
+  \ 'ctagsbin' : '/snap/bin/ctags', " change this line to ctags path
   \ 'ctagstype' : 'rust',
   \ 'kinds' : [
       \ 'n:modules',
