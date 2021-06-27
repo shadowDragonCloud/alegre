@@ -1,3 +1,7 @@
+
+" when used on a new machine:
+" 1. change tagbar_ctags_bin
+" 2. install color scheme "one"
 "
 " vim native configs
 "
