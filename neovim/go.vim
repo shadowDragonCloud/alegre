@@ -1,7 +1,10 @@
-
+"
 " when used on a new machine:
+" 0. for terminal, recommend to use solarized pallete
 " 1. change tagbar_ctags_bin
-" 2. install color scheme "one"
+" 2. change $TRRM env variable to your terminal type
+"
+" --- config begin ---
 "
 " vim native configs
 "
@@ -10,7 +13,7 @@ set nocompatible
 " set cursorline
 " set cursorcolumn 
 set number
-set showmatch " 显示括号匹配
+set showmatch " show brackets match
 set autoindent
 " tab
 set tabstop=4
@@ -21,7 +24,6 @@ set foldmethod=indent
 set foldlevelstart=99 " default not fold
 set incsearch
 syntax enable
-"syntax on
 filetype plugin indent on
 set mouse=a
 
@@ -40,20 +42,20 @@ noremap <c-l> <c-w>l
 noremap <c-h> <c-w>h
 nnoremap <silent> gb <C-o>
 
-" tab 标签页切换快捷键
-:nn <Leader>1 1gt
-:nn <Leader>2 2gt
-:nn <Leader>3 3gt
-:nn <Leader>4 4gt
-:nn <Leader>5 5gt
-:nn <Leader>6 6gt
-:nn <Leader>7 7gt
-:nn <Leader>8 8gt
-:nn <Leader>9 8gt
-:nn <Leader>0 :tablast<CR>
+" switch tab
+nnoremap <Leader>1 1gt
+nnoremap <Leader>2 2gt
+nnoremap <Leader>3 3gt
+nnoremap <Leader>4 4gt
+nnoremap <Leader>5 5gt
+nnoremap <Leader>6 6gt
+nnoremap <Leader>7 7gt
+nnoremap <Leader>8 8gt
+nnoremap <Leader>9 8gt
+nnoremap <Leader>0 :tablast<CR>
 
 " aoto write buffer
-au InsertLeave *.go,*.sh write
+autocmd InsertLeave *.go,*.sh write
 
 "
 " vim-plug
@@ -63,11 +65,13 @@ au InsertLeave *.go,*.sh write
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.local/share/nvim/plugged')
 
-" vim theme & color
-Plug 'KeitaNakamura/neodark.vim'
-Plug 'crusoexia/vim-monokai'
-Plug 'acarapetis/vim-colors-github'
+" vim color scheme
 Plug 'rakr/vim-one'
+Plug 'altercation/vim-colors-solarized'
+Plug 'lifepillar/vim-solarized8'
+" Plug 'KeitaNakamura/neodark.vim'
+" Plug 'crusoexia/vim-monokai'
+" Plug 'acarapetis/vim-colors-github'
 
 " status line
 Plug 'vim-airline/vim-airline'
@@ -111,10 +115,44 @@ Plug 'sebdah/vim-delve'
 " Initialize plugin system
 call plug#end()
 
-" theme
-set termguicolors
+" color scheme
+let $TERM="iterm2"
+"
+" color scheme one config, begin
+"
+"Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
+"If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
+"(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
+if (empty($TMUX))
+  if (has("nvim"))
+    "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  endif
+  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+  if (has("termguicolors"))
+    set termguicolors
+  endif
+endif
+let g:one_allow_italics = 1 " enable italics
 colorscheme one
 set background=dark
+"" color scheme one config, end
+""
+"" color scheme solarized config, begin
+""
+"set notermguicolors
+"colorscheme solarized
+"set background=dark
+"" color scheme solarized config, end
+""
+"" color scheme solarized8 config, begin
+""
+"set termguicolors
+"colorscheme solarized8
+"set background=dark
+"" color scheme solarized config, end
 
 "status line
 let g:airline#extensions#tabline#enabled = 1
