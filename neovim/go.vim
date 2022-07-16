@@ -77,8 +77,8 @@ Plug 'lifepillar/vim-solarized8'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-" nerdtree
-Plug 'scrooloose/nerdtree'
+" file system explorer
+Plug 'preservim/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
@@ -162,14 +162,13 @@ let g:airline_powerline_fonts = 1
 " set airline theme
 let g:airline_theme='one'
 
-" nerdtree
-map <c-t> :NERDTreeToggle<CR>
+" file system explorer
+nnoremap <c-t> :NERDTreeToggle<CR>
 let NERDTreeShowLineNumbers=1
-let NERDTreeAutoCenter=1
 let NERDTreeShowHidden=0
 " let NERDTreeWinSize=31
-let NERDTreeIgnore=['\.pyc','\~$','\.swp']
-let NERDTreeShowBookmarks=2
+" let NERDTreeIgnore=['\.pyc','\~$','\.swp']
+let NERDTreeShowBookmarks=1
 
 let g:nerdtree_tabs_open_on_console_startup=1
 let g:NERDTreeGitStatusIndicatorMapCustom = {
@@ -184,7 +183,6 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
     \ 'Ignored'   : '☒',
     \ "Unknown"   : "?"
     \ }
-
 let g:NERDTreeGitStatusShowIgnored = 1
 
 " fuzzy finder
