@@ -185,6 +185,16 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
     \ }
 let g:NERDTreeGitStatusShowIgnored = 1
 
+" git
+" turn on line number highlighting for hunks
+let g:gitgutter_highlight_linenrs = 1
+" toggle line highlighting for hunks
+nnoremap <leader>hl ::GitGutterLineHighlightsToggle<CR>
+" jump between hunks
+nmap hn <Plug>(GitGutterNextHunk)
+nmap hb <Plug>(GitGutterPrevHunk)
+" to preview a hunk: <Leader>hp
+
 " fuzzy finder
 " search word under cursor, the pattern is treated as regex, and enter normal mode directly
 noremap fd :<C-U><C-R>=printf("Leaderf! rg -e \"%s\" ", expand("<cword>"))<CR>
