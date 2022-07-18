@@ -191,8 +191,8 @@ let g:gitgutter_highlight_linenrs = 1
 " toggle line highlighting for hunks
 nnoremap <leader>hl ::GitGutterLineHighlightsToggle<CR>
 " jump between hunks
-nmap hn <Plug>(GitGutterNextHunk)
-nmap hb <Plug>(GitGutterPrevHunk)
+nmap <leader>hn <Plug>(GitGutterNextHunk)
+nmap <leader>hb <Plug>(GitGutterPrevHunk)
 " to preview a hunk: <Leader>hp
 
 " fuzzy finder
@@ -204,6 +204,9 @@ noremap fd :<C-U><C-R>=printf("Leaderf! rg -e \"%s\" ", expand("<cword>"))<CR>
 noremap <silent> fr :Leaderf rg<CR>
 " on the fly, grep all file paths
 noremap <silent> ff :Leaderf --popup file<CR>
+
+" pairs
+" use '%' in normal mode, to jump between paired-bracket
 
 " tag viewer
 let g:tagbar_width=100
