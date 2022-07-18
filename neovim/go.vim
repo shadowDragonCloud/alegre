@@ -87,7 +87,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
 " fuzzy finder
-Plug 'Yggdroot/LeaderF' , { 'do': './install.sh' }
+Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 
 " auto pairs
 Plug 'jiangmiao/auto-pairs'
@@ -196,12 +196,14 @@ nmap hb <Plug>(GitGutterPrevHunk)
 " to preview a hunk: <Leader>hp
 
 " fuzzy finder
+" enable popup mode
+" let g:Lf_WindowPosition = 'popup'
 " search word under cursor, the pattern is treated as regex, and enter normal mode directly
 noremap fd :<C-U><C-R>=printf("Leaderf! rg -e \"%s\" ", expand("<cword>"))<CR>
 " on the fly, grep all file contents
 noremap <silent> fr :Leaderf rg<CR>
 " on the fly, grep all file paths
-noremap <silent> ff :Leaderf file<CR>
+noremap <silent> ff :Leaderf --popup file<CR>
 
 " tag viewer
 let g:tagbar_width=100
