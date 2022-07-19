@@ -93,24 +93,23 @@ Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 Plug 'jiangmiao/auto-pairs'
 
 " tag viewer 
-Plug 'majutsushi/tagbar'
-
-" markdown
-Plug 'iamcco/mathjax-support-for-mkdp'
-Plug 'iamcco/markdown-preview.vim'
-
-" go
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'preservim/tagbar' " should install Universal Ctags or other ctags compatible bin first
 
 " completion
 Plug 'Valloric/YouCompleteMe'
+
+" go
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" go debugger
+Plug 'sebdah/vim-delve'
 
 " snippets
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
-" debugger
-Plug 'sebdah/vim-delve'
+" markdown
+Plug 'iamcco/mathjax-support-for-mkdp'
+Plug 'iamcco/markdown-preview.vim'
 
 " Initialize plugin system
 call plug#end()
@@ -209,37 +208,38 @@ noremap <silent> ff :Leaderf --popup file<CR>
 " use '%' in normal mode, to jump between paired-bracket
 
 " tag viewer
-let g:tagbar_width=100
-let g:tagbar_ctags_bin="/usr/local/bin/ctags"
-"" let g:tagbar_use_cache = 0 " required with snap ctags
 nmap <silent> tb :TagbarToggle<CR>
-let g:tagbar_type_go = {
-    \ 'ctagstype' : 'go',
-    \ 'kinds'     : [
-        \ 'p:package',
-        \ 'i:imports:1',
-        \ 'c:constants',
-        \ 'v:variables',
-        \ 't:types',
-        \ 'n:interfaces',
-        \ 'w:fields',
-        \ 'e:embedded',
-        \ 'm:methods',
-        \ 'r:constructor',
-        \ 'f:functions'
-    \ ],
-    \ 'sro' : '.',
-    \ 'kind2scope' : {
-        \ 't' : 'ctype',
-        \ 'n' : 'ntype'
-    \ },
-    \ 'scope2kind' : {
-        \ 'ctype' : 't',
-        \ 'ntype' : 'n'
-    \ },
-    \ 'ctagsbin'  : 'gotags',
-    \ 'ctagsargs' : '-sort -silent'
-\ }
+let g:tagbar_width = min([100, winwidth(0) / 7 * 3])
+" Only needed if it is not in one of the directories in your $PATH environment variable.
+let g:tagbar_ctags_bin="/usr/local/bin/ctags"
+"" let g:tagbar_use_cache = 0 " required when use snap ctags
+"let g:tagbar_type_go = {
+"    \ 'ctagstype' : 'go',
+"    \ 'kinds'     : [
+"        \ 'p:package',
+"        \ 'i:imports:1',
+"        \ 'c:constants',
+"        \ 'v:variables',
+"        \ 't:types',
+"        \ 'n:interfaces',
+"        \ 'w:fields',
+"        \ 'e:embedded',
+"        \ 'm:methods',
+"        \ 'r:constructor',
+"        \ 'f:functions'
+"    \ ],
+"    \ 'sro' : '.',
+"    \ 'kind2scope' : {
+"        \ 't' : 'ctype',
+"        \ 'n' : 'ntype'
+"    \ },
+"    \ 'scope2kind' : {
+"        \ 'ctype' : 't',
+"        \ 'ntype' : 'n'
+"    \ },
+"    \ 'ctagsbin'  : 'gotags',
+"    \ 'ctagsargs' : '-sort -silent'
+"\ }
 
 " markdown
 map <silent> <F5> <Plug>MarkdownPreview
