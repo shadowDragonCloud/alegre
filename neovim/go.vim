@@ -26,6 +26,7 @@ set incsearch
 syntax enable
 filetype plugin indent on
 set mouse=a
+set autowrite
 
 " <Leader> 
 let mapleader="," 
@@ -36,10 +37,14 @@ nmap <Leader>c "+yy
 nmap <Leader>v "+p
 
 " switch windows
+noremap <c-h> <c-w>h
 noremap <c-j> <c-w>j
 noremap <c-k> <c-w>k
 noremap <c-l> <c-w>l
-noremap <c-h> <c-w>h
+inoremap <c-h> <C-\><C-N><C-w>h
+inoremap <c-j> <C-\><C-N><C-w>j
+inoremap <c-k> <C-\><C-N><C-w>k
+inoremap <c-l> <C-\><C-N><C-w>l
 nnoremap <silent> gb <C-o>
 
 " switch tab
@@ -82,6 +87,9 @@ Plug 'preservim/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
+" terminal
+Plug 'skywind3000/vim-terminal-help'
+
 " git
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
@@ -97,6 +105,7 @@ Plug 'preservim/tagbar' " should install Universal Ctags or other ctags compatib
 
 " completion
 Plug 'Valloric/YouCompleteMe'
+Plug 'ncm2/float-preview.nvim'
 
 " go
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -163,6 +172,7 @@ let g:airline_theme='one'
 
 " file system explorer
 nnoremap <c-t> :NERDTreeToggle<CR>
+nnoremap tf :NERDTreeFind<CR> <bar> :wincmd p<CR>
 let NERDTreeShowLineNumbers=1
 let NERDTreeShowHidden=0
 " let NERDTreeWinSize=31
@@ -183,6 +193,14 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
     \ "Unknown"   : "?"
     \ }
 let g:NERDTreeGitStatusShowIgnored = 1
+
+" terminal
+let g:terminal_key = '<Leader>t'
+let g:terminal_height = 15
+tnoremap <c-h> <C-\><C-N><C-w>h
+tnoremap <c-j> <C-\><C-N><C-w>j
+tnoremap <c-k> <C-\><C-N><C-w>k
+tnoremap <c-l> <C-\><C-N><C-w>l
 
 " git
 " turn on line number highlighting for hunks
@@ -246,28 +264,15 @@ map <silent> <F5> <Plug>MarkdownPreview
 map <silent> <F6> <Plug>StopMarkdownPreview
 
 " vim-go
-set autowrite
-"let g:go_fmt_command = "goimports"
-let g:go_fmt_command="gopls"
-let g:go_gopls_gofumpt=1
-" let g:go_autodetect_gopath = 1
-let g:go_list_type = "quickfix"
-
-let g:go_version_warning = 1
+" hightling
 let g:go_highlight_types = 1
 let g:go_highlight_fields = 1
 let g:go_highlight_functions = 1
 let g:go_highlight_function_calls = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_extra_types = 1
-" let g:go_highlight_methods = 1
 let g:go_highlight_generate_tags = 1
-let g:go_auto_type_info = 1
-let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
-let g:go_metalinter_autosave = 1
-"let g:go_metalinter_deadline = 5s
-
-" go def
+" go to def
 let g:go_def_mode = 'gopls'
 let g:go_def_mapping_enabled = 0
 autocmd FileType go nmap gd <Plug>(go-def-tab)
@@ -275,6 +280,18 @@ autocmd FileType go nmap gdd <Plug>(go-def)
 autocmd FileType go nmap gds <Plug>(go-def-split)
 autocmd FileType go nmap gdv <Plug>(go-def-vertical)
 autocmd FileType go nmap gt <Plug>(go-def-type-tab)
+" format
+"let g:go_fmt_command = "goimports"
+let g:go_fmt_command="gopls"
+let g:go_gopls_gofumpt=1
+" lint
+let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
+"let g:go_metalinter_deadline = 5s
+let g:go_metalinter_autosave = 1
+let g:go_list_type = "quickfix"
+" other config
+let g:go_version_warning = 1
+let g:go_auto_type_info = 1
 
 map <C-n> :cnext<CR>
 map <C-m> :cprevious<CR>
@@ -282,16 +299,20 @@ nnoremap <leader>a :cclose<CR>
 
 autocmd FileType go nmap <leader>b  <Plug>(go-build)
 autocmd FileType go nmap <leader>r  <Plug>(go-run)
-autocmd FileType go nmap <leader>t  <Plug>(go-test)
+autocmd FileType go nmap <leader>gt  <Plug>(go-test)
 
-" ycm
-let g:ycm_key_list_select_completion = ['<C-n>', '<space>']
+" completion
+let g:ycm_key_list_select_completion = ['<C-n>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
+" enrich identifier completer content
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_gopls_binary_path = "gopls"
+" use gopls daemon server
+let g:ycm_gopls_args = ["-remote=auto"]
+" complete menu
 set completeopt=menuone
-
+let g:float_preview#docked=0
 " snippets
-" better key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+let g:ultisnipsexpandtrigger = "<tab>"
