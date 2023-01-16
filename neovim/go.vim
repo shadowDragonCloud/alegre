@@ -276,9 +276,9 @@ let g:go_highlight_generate_tags = 1
 let g:go_def_mode = 'gopls'
 let g:go_def_mapping_enabled = 0
 autocmd FileType go nmap gd <Plug>(go-def-tab)
-autocmd FileType go nmap gdd <Plug>(go-def)
-autocmd FileType go nmap gds <Plug>(go-def-split)
-autocmd FileType go nmap gdv <Plug>(go-def-vertical)
+autocmd FileType go nmap gw <Plug>(go-def)
+" autocmd FileType go nmap gds <Plug>(go-def-split)
+" autocmd FileType go nmap gdv <Plug>(go-def-vertical)
 autocmd FileType go nmap gt <Plug>(go-def-type-tab)
 " format
 "let g:go_fmt_command = "goimports"
