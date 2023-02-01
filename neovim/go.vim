@@ -283,7 +283,8 @@ autocmd FileType go nmap gt <Plug>(go-def-type-tab)
 " format
 "let g:go_fmt_command = "goimports"
 let g:go_fmt_command="gopls"
-let g:go_gopls_gofumpt=1
+" gofumpt is not support by go1.16
+"let g:go_gopls_gofumpt=1
 " lint
 let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
 "let g:go_metalinter_deadline = 5s
