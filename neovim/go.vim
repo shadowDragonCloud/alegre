@@ -109,8 +109,6 @@ Plug 'ncm2/float-preview.nvim'
 
 " go
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-" go debugger
-Plug 'sebdah/vim-delve'
 
 " snippets
 Plug 'SirVer/ultisnips'
@@ -290,6 +288,12 @@ let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
 "let g:go_metalinter_deadline = 5s
 let g:go_metalinter_autosave = 1
 let g:go_list_type = "quickfix"
+" debug
+" tips: if encounter file not found error, can check if path contains symlink
+let g:go_debug_windows = {
+      \ 'vars':       'rightbelow 50vnew',
+      \ 'stack':      'rightbelow 10new',
+      \ }
 " other config
 let g:go_version_warning = 1
 let g:go_auto_type_info = 1
