@@ -279,14 +279,16 @@ autocmd FileType go nmap gw <Plug>(go-def)
 " autocmd FileType go nmap gdv <Plug>(go-def-vertical)
 autocmd FileType go nmap gt <Plug>(go-def-type-tab)
 " format
-"let g:go_fmt_command = "goimports"
-let g:go_fmt_command="gopls"
+let g:go_fmt_command = "goimports"
+" let g:go_fmt_command="gopls"
 " gofumpt is not support by go1.16
-"let g:go_gopls_gofumpt=1
+" let g:go_gopls_gofumpt=1
 " lint
-let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
-"let g:go_metalinter_deadline = 5s
+" default is staticcheck
+let g:go_metalinter_command = "golangci-lint"
 let g:go_metalinter_autosave = 1
+let g:go_metalinter_autosave_enabled = ['vet', 'revive', 'errcheck']
+"let g:go_metalinter_deadline = 5s
 let g:go_list_type = "quickfix"
 " debug
 " tips: if encounter file not found error, can check if path contains symlink
