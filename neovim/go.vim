@@ -60,7 +60,19 @@ nnoremap <Leader>9 8gt
 nnoremap <Leader>0 :tablast<CR>
 
 " aoto write buffer
-autocmd InsertLeave *.go,*.sh write
+autocmd InsertLeave *.go,*.sh,*.py write
+
+" quickfix list
+nnoremap qn :cnext<CR>
+nnoremap qp :cprev<CR>
+nnoremap qc :cclose<CR>
+nnoremap qo :copen<CR>
+
+" window location list
+nnoremap ln :lnext<CR>
+nnoremap lp :lprev<CR>
+nnoremap lc :lclose<CR>
+nnoremap lo :lopen<CR>
 
 "
 " vim-plug
@@ -107,6 +119,9 @@ Plug 'preservim/tagbar' " should install Universal Ctags or other ctags compatib
 Plug 'Valloric/YouCompleteMe'
 Plug 'ncm2/float-preview.nvim'
 
+" multi-lang comment
+Plug 'scrooloose/nerdcommenter'
+
 " go
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
@@ -117,6 +132,12 @@ Plug 'honza/vim-snippets'
 " markdown
 Plug 'iamcco/mathjax-support-for-mkdp'
 Plug 'iamcco/markdown-preview.vim'
+
+" python
+Plug 'tmhedberg/SimpylFold'
+Plug 'davidhalter/jedi-vim'
+Plug 'sbdchd/neoformat'
+Plug 'neomake/neomake'
 
 " Initialize plugin system
 call plug#end()
@@ -300,10 +321,6 @@ let g:go_debug_windows = {
 let g:go_version_warning = 1
 let g:go_auto_type_info = 1
 
-map <C-n> :cnext<CR>
-map <C-m> :cprevious<CR>
-nnoremap <leader>a :cclose<CR>
-
 autocmd FileType go nmap <leader>b  <Plug>(go-build)
 autocmd FileType go nmap <leader>r  <Plug>(go-run)
 autocmd FileType go nmap <leader>gt  <Plug>(go-test)
@@ -323,3 +340,24 @@ set completeopt=menuone
 let g:float_preview#docked=0
 " snippets
 let g:ultisnipsexpandtrigger = "<tab>"
+
+"
+" python
+"
+" disable autocompletion, because we use deoplete for completion
+let g:jedi#completions_enabled = 0
+"autocmd FileType python let g:jedi#goto_command = "gd"
+let g:jedi#goto_command = "gd"
+" open the go-to function in split, not another buffer
+"let g:jedi#use_splits_not_buffers = "right"
+let g:jedi#use_tabs_not_buffers = 1
+
+" format python code when save buffer
+autocmd BufWritePre *.py undojoin | Neoformat
+
+" python linters
+let g:neomake_python_enabled_makers = ['pylint']
+" Full config: when writing or reading a buffer, and on changes in insert and
+" normal mode (after 500ms; no delay when writing).
+autocmd FileType python call neomake#configure#automake('nrwi', 500)
+let g:neomake_open_list = 2
