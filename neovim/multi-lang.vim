@@ -69,10 +69,10 @@ nnoremap qc :cclose<CR>
 nnoremap qo :copen<CR>
 
 " window location list
-nnoremap ln :lnext<CR>
-nnoremap lp :lprev<CR>
-nnoremap lc :lclose<CR>
-nnoremap lo :lopen<CR>
+nnoremap zn :lnext<CR>
+nnoremap zp :lprev<CR>
+nnoremap zc :lclose<CR>
+nnoremap zo :lopen<CR>
 
 "
 " vim-plug
