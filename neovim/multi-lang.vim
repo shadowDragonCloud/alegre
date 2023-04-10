@@ -2,7 +2,7 @@
 " when used on a new machine:
 " 0. for terminal, recommend to use solarized pallete
 " 1. change tagbar_ctags_bin
-" 2. change $TRRM env variable to your terminal type
+" 2. change $TERM env variable to your terminal type
 "
 " --- config begin ---
 "
@@ -63,10 +63,10 @@ nnoremap <Leader>0 :tablast<CR>
 autocmd InsertLeave *.go,*.sh,*.py write
 
 " quickfix list
-nnoremap qn :cnext<CR>
-nnoremap qp :cprev<CR>
-nnoremap qc :cclose<CR>
-nnoremap qo :copen<CR>
+nnoremap sn :cnext<CR>
+nnoremap sp :cprev<CR>
+nnoremap sc :cclose<CR>
+nnoremap so :copen<CR>
 
 " window location list
 nnoremap zn :lnext<CR>
@@ -143,7 +143,7 @@ Plug 'neomake/neomake'
 call plug#end()
 
 " color scheme
-let $TERM="iterm2"
+" let $TERM="iterm2"
 "
 " color scheme one config, begin
 "
@@ -248,8 +248,8 @@ noremap <silent> ff :Leaderf --popup file<CR>
 nmap <silent> tb :TagbarToggle<CR>
 let g:tagbar_width = min([100, winwidth(0) / 7 * 3])
 " Only needed if it is not in one of the directories in your $PATH environment variable.
-let g:tagbar_ctags_bin="/usr/local/bin/ctags"
-"" let g:tagbar_use_cache = 0 " required when use snap ctags
+let g:tagbar_ctags_bin="/snap/bin/ctags"
+let g:tagbar_use_cache = 0 " required when use snap ctags
 "let g:tagbar_type_go = {
 "    \ 'ctagstype' : 'go',
 "    \ 'kinds'     : [
